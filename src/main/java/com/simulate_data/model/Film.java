@@ -1,4 +1,4 @@
-package com.fakedata.model;
+package com.simulate_data.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

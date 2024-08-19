@@ -1,6 +1,6 @@
-package com.fakedata.service;
+package com.simulate_data.service;
 
-import com.fakedata.repository.VideoRepository;
+import com.simulate_data.repository.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,8 +23,8 @@ public class VideoService {
                 .collect(Collectors.toList());
     }
 
-    public List<Integer> getRelatedVideos(long videoId, long limit, long offset) {
+    public List<Integer> getRelatedVideos(int videoId, int limit, int offset) {
         String category = videoRepository.findById(videoId).get().getCategory();
-        return videoRepository.findByCategoryLimitOffset(category, limit, offset);
+        return videoRepository.findByTagLimitOffset(category, limit, offset);
     }
 }

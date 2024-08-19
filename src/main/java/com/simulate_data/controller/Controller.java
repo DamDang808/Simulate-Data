@@ -1,33 +1,22 @@
-package com.fakedata.controller;
+package com.simulate_data.controller;
 
-import com.fakedata.model.Film;
-import com.fakedata.service.FilmService;
-import com.fakedata.service.VideoService;
+import com.simulate_data.service.FilmService;
+import com.simulate_data.service.VideoService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/")
 public class Controller {
-    @Autowired
-    private Environment env;
-
     @Autowired
     private FilmService filmService;
 
     @Autowired
     private VideoService videoService;
-
-    @RequestMapping("/")
-    public String home() {
-        // This is useful for debugging
-        // When having multiple instance of image service running at different ports.
-        // We load balance among them, and display which instance received the request.
-        return "Hello from Film Service running at port: " + env.getProperty("local.server.port");
-    }
 
     @GetMapping("/recommendation/film/{userId}")
     public List<Integer> getRecommendationFilms(@PathVariable final int userId, @RequestParam final int profileId, @RequestParam final int limit, @RequestParam final int offset) {
@@ -40,12 +29,12 @@ public class Controller {
     }
 
     @GetMapping("/related/film/{filmId}")
-    public List<Integer> getRelatedFilms(@PathVariable final long filmId, @RequestParam final long limit, @RequestParam final long offset) {
+    public List<Integer> getRelatedFilms(@PathVariable final int filmId, @RequestParam final int limit, @RequestParam final int offset) {
         return filmService.getRelatedFilms(filmId, limit, offset);
     }
 
     @GetMapping("/related/video/{videoId}")
-    public List<Integer> getRelatedVideos(@PathVariable final long videoId, @RequestParam final long limit, @RequestParam final long offset) {
+    public List<Integer> getRelatedVideos(@PathVariable final int videoId, @RequestParam final int limit, @RequestParam final int offset) {
         return videoService.getRelatedVideos(videoId, limit, offset);
     }
 }
