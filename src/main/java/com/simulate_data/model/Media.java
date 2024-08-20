@@ -10,19 +10,16 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
-@Table(name = "film")
+@Table(name = "media")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Film implements Serializable {
+public class Media implements Serializable {
 
     @Id
     @GeneratedValue
     private int id;
 
-    private String title;
-    private String genre;
-    private String leadStudio;
-    private int year;
+    private String tag;
 }
